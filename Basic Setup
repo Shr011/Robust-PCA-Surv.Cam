@@ -1,0 +1,25 @@
+1) Create a Project Folder
+You need a dedicated folder on your computer for this project.
+Using File Explorer:
+
+Open File Explorer
+Go to your Desktop or Documents
+Right click → New → Folder
+Name it as you like.
+
+2) Create a Virtual Environment:
+Paste in terminal:
+
+python -m venv venv
+
+Now activate it by typing (# On Windows:) :
+
+venv\Scripts\activate
+
+(venv) C:\Users\YourName\Desktop\Folder_name>         (Your terminal should look like this)
+
+Now in the same terminal, copy-paste this and press Enter:
+
+pip install numpy scipy opencv-python matplotlib ipython requests
+
+3) Install IP Webcam.
