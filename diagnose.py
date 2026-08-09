@@ -35,10 +35,10 @@ for i in range(10):
             print(f"   Fetch {i+1:>2}: {ms:>6.0f}ms    "
                   f"({frame.shape[1]}x{frame.shape[0]})")
         else:
-            print(f"   Fetch {i+1:>2}: Empty frame  ❌")
+            print(f"   Fetch {i+1:>2}: Empty frame  ")
 
     except Exception as e:
-        print(f"   Fetch {i+1:>2}: Failed ❌  ({e})")
+        print(f"   Fetch {i+1:>2}: Failed   ({e})")
 
 # ── Summary ──
 print(f"\n Results:")
