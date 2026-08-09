@@ -10,11 +10,11 @@ from config import FRAME_WIDTH, FRAME_HEIGHT
 # ----------------------------
 # LOAD THE SAVED MATRIX
 # ----------------------------
-print("📂 Loading saved matrix...")
+print(" Loading saved matrix...")
 M = load_matrix("matrix_M.npy")
 
 if M is None:
-    print("❌ matrix_M.npy not found. Run test_capture.py first.")
+    print(" matrix_M.npy not found. Run test_capture.py first.")
     exit()
 
 # ----------------------------
@@ -25,7 +25,7 @@ if M is None:
 USE_QUICK_TEST = True
 if USE_QUICK_TEST:
     M = M[:, :50]
-    print(f"⚡ Quick test mode: using first 50 frames → Shape: {M.shape}")
+    print(f" Quick test mode: using first 50 frames → Shape: {M.shape}")
 
 # ----------------------------
 # RUN RPCA
@@ -36,7 +36,7 @@ L, S    = rpca.fit(M)
 # ----------------------------
 # SHOW RESULTS
 # ----------------------------
-print("\n📊 Showing Results...")
+print("\n Showing Results...")
 
 # Pick frame number 25 to visualize
 frame_idx = 24
@@ -65,9 +65,9 @@ plt.tight_layout()
 plt.show()
 
 # ----------------------------
-# SAVE L and S FOR NEXT STEPS
+# SAVED L and S FOR NEXT 
 # ----------------------------
 np.save("matrix_L.npy", L)
 np.save("matrix_S.npy", S)
-print("\n💾 Saved matrix_L.npy and matrix_S.npy")
-print("✅ Step 3 Complete!")
+print("\n Saved matrix_L.npy and matrix_S.npy")
+print(" Step 3 Complete!")
