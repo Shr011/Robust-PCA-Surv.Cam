@@ -18,7 +18,7 @@ if M is not None:
     # VISUALIZE WHAT WE CAPTURED
     # ----------------------------
 
-    print("\n📊 Showing visualizations...")
+    print("\n Showing visualizations...")
 
     fig, axes = plt.subplots(1, 3, figsize=(15, 5))
     fig.suptitle("Frame Acquisition Results", fontsize=14)
@@ -56,4 +56,4 @@ if M is not None:
     plt.grid(True)
     plt.show()
 
-    print("\n✅ Step 2 Complete! Matrix M is ready for RPCA.")
+    print("\n  Complete! Matrix M is ready for RPCA.")
