@@ -85,11 +85,11 @@ class AnomalyDetector:
         self.log_file         = log_file
         self.screenshot_dir   = screenshot_dir
 
-        # Zone list — add your custom zones here
+        # Zone list — add your custom zones
         self.zones = []
 
         # Object tracking
-        self._tracked        = {}    # id → TrackedObject
+        self._tracked        = {}    # id
         self._next_id        = 1
         self._iou_threshold  = 0.3   # Match boxes across frames
 
@@ -397,7 +397,7 @@ class AnomalyDetector:
     def print_summary(self):
         uptime = time.time() - self.session_start
         print(f"\n{'='*45}")
-        print(f"  📊  Session Summary")
+        print(f"    Session Summary")
         print(f"{'='*45}")
         print(f"  Uptime           : {uptime/60:.1f} minutes")
         print(f"  Total Detections : {self.total_detections}")
