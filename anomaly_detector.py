@@ -127,8 +127,8 @@ class AnomalyDetector:
                     "event_type", "zone", "object_count",
                     "duration_seconds", "screenshot_path"
                 ])
-        print(f"📝 Log file   : {self.log_file}")
-        print(f"📸 Screenshots: {self.screenshot_dir}/")
+        print(f" Log file   : {self.log_file}")
+        print(f" Screenshots: {self.screenshot_dir}/")
 
     # -------------------------------------------------------
     # ZONE MANAGEMENT
@@ -145,7 +145,7 @@ class AnomalyDetector:
         zone = Zone(name, x1, y1, x2, y2, color)
         self.zones.append(zone)
         self._using_full_frame = False
-        print(f"🟥 Zone added: '{name}'  ({x1},{y1}) → ({x2},{y2})")
+        print(f" Zone added: '{name}'  ({x1},{y1}) → ({x2},{y2})")
         return zone
 
     def add_full_frame_zone(self):
@@ -258,7 +258,7 @@ class AnomalyDetector:
                 f"{duration:.1f}", screenshot_path
             ])
 
-        print(f"🚨 [{time_str}] {event_type} | Zone: {zone_name} | "
+        print(f" [{time_str}] {event_type} | Zone: {zone_name} | "
               f"Objects: {obj_count} | Duration: {duration:.1f}s")
 
     # -------------------------------------------------------
