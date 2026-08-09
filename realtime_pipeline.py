@@ -42,7 +42,7 @@ class RealTimePipeline:
         )
 
         # Add detection zones
-        # ✅ Full frame zone — change these to monitor specific areas
+        #  Full frame zone — change these to monitor specific areas
         self.detector.add_zone(
      "Full Frame", 0, 0, FRAME_WIDTH, FRAME_HEIGHT,
     color=(0, 200, 255)
@@ -102,7 +102,7 @@ class RealTimePipeline:
             if not ret or frame is None:
                 fail_streak += 1
                 if fail_streak > 30:
-                    print("❌ Too many read failures during learning.")
+                    print(" Too many read failures during learning.")
                     fail_streak = 0
                 time.sleep(0.05)
                 continue
@@ -129,7 +129,7 @@ class RealTimePipeline:
         self.learn_progress = 100
         self.status_msg   = "Done!"
         self.is_learning  = False
-        print("\n✅ Background learned! Live detection starting...\n")
+        print("\n Background learned! Live detection starting...\n")
 
     # -------------------------------------------------------
     # DETECT
@@ -165,7 +165,7 @@ class RealTimePipeline:
     # -------------------------------------------------------
     def run(self):
         print("=" * 50)
-        print("  🎥  Robust PCA Surveillance System")
+        print("    Robust PCA Surveillance System")
         print("=" * 50)
 
         cam = PhoneCamera()
@@ -182,7 +182,7 @@ class RealTimePipeline:
         self._show_loading(cam)
         t.join()
 
-        print("▶️  Live detection started!")
+        print("  Live detection started")
         print("   Q = Quit  |  R = Refresh  |  S = Save  |  Z = Zone editor\n")
 
         saved = 0
@@ -228,16 +228,16 @@ class RealTimePipeline:
             if key == ord('q'):
                 break
             elif key == ord('r') and not self.is_learning:
-                print("\n🔄 Manual background refresh.")
+                print("\n Manual background refresh.")
                 threading.Thread(target=self._learn_thread,
                                  args=(cam,), daemon=True).start()
             elif key == ord('s'):
                 saved += 1
                 fn = f"saved_frame_{saved:03d}.png"
                 cv2.imwrite(fn, display)
-                print(f"💾 Saved: {fn}")
+                print(f" Saved: {fn}")
 
         cam.release()
         cv2.destroyAllWindows()
         self.detector.print_summary()
-        print("✅ Stopped cleanly.")
+        print(" Stopped cleanly.")
