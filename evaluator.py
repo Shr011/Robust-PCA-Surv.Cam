@@ -36,7 +36,7 @@ class Evaluator:
         Tests how fast RPCA runs at different matrix sizes.
         """
         print(f"\n{'='*50}")
-        print(f"  🧪  Test 1: RPCA Speed")
+        print(f"    Test 1: RPCA Speed")
         print(f"{'='*50}")
 
         configs = [
@@ -89,9 +89,9 @@ class Evaluator:
             }
             speed_results.append(result)
 
-            status = "✅" if elapsed < 30 else "⚠️"
+            status = "ok" if elapsed < 30 else "noo"
             print(f"  {status} Time     : {elapsed:.1f}s")
-            print(f"  📊 Accuracy : {accuracy:.1f}%")
+            print(f"   Accuracy : {accuracy:.1f}%")
 
         self.results["rpca_speed"] = speed_results
         return speed_results
@@ -105,7 +105,7 @@ class Evaluator:
         Creates known foreground and checks detection.
         """
         print(f"\n{'='*50}")
-        print(f"  🧪  Test 2: Separator Accuracy")
+        print(f"    Test 2: Separator Accuracy")
         print(f"{'='*50}")
 
         pixels    = FRAME_WIDTH * FRAME_HEIGHT
@@ -155,7 +155,7 @@ class Evaluator:
                           (sensitivity + precision)
                           if (sensitivity + precision) > 0 else 0)
 
-            rating = "✅ Best" if f1 > 0.7 else ("⚠️ OK" if f1 > 0.4 else "❌ Poor")
+            rating = " Best" if f1 > 0.7 else (" OK" if f1 > 0.4 else " Poor")
 
             print(f"  {thresh:>10.2f} {sensitivity:>12.1%}"
                   f" {precision:>11.1%} {f1:>9.1%}  {rating}")
@@ -169,7 +169,7 @@ class Evaluator:
 
         # Find best threshold
         best = max(sep_results, key=lambda x: x["f1_score"])
-        print(f"\n  💡 Best threshold for this scene: {best['threshold']}"
+        print(f"\n   Best threshold for this scene: {best['threshold']}"
               f"  (F1={best['f1_score']:.1%})")
         print(f"     Update THRESHOLD = {best['threshold']} in config.py")
 
@@ -185,7 +185,7 @@ class Evaluator:
         Times each stage of the detection pipeline.
         """
         print(f"\n{'='*50}")
-        print(f"  🧪  Test 3: Pipeline Timing")
+        print(f"    Test 3: Pipeline Timing")
         print(f"{'='*50}\n")
 
         pixels  = FRAME_WIDTH * FRAME_HEIGHT
@@ -232,16 +232,16 @@ class Evaluator:
         total_ms = profiler.report()
         est_fps  = 1000 / total_ms if total_ms > 0 else 0
 
-        print(f"  💡 Estimated real-time FPS: {est_fps:.1f}")
+        print(f"   Estimated real-time FPS: {est_fps:.1f}")
 
         if est_fps >= 10:
-            print(f"  ✅ Excellent! System runs smoothly.")
+            print(f"   Excellent! System runs smoothly.")
         elif est_fps >= 5:
-            print(f"  ✅ Good. Acceptable for surveillance.")
+            print(f"   Good. Acceptable for surveillance.")
         elif est_fps >= 2:
-            print(f"  ⚠️ Slow. Consider reducing FRAME_WIDTH to 160.")
+            print(f"   Slow. Consider reducing FRAME_WIDTH to 160.")
         else:
-            print(f"  ❌ Too slow. Reduce frame size and LEARN_FRAMES.")
+            print(f"   Too slow. Reduce frame size and LEARN_FRAMES.")
 
         self.results["pipeline_timing"] = {
             "total_ms_per_frame" : round(total_ms, 2),
@@ -255,7 +255,7 @@ class Evaluator:
     def collect_system_info(self):
         """Collects basic system information."""
         print(f"\n{'='*50}")
-        print(f"  🧪  Test 4: System Info")
+        print(f"    Test 4: System Info")
         print(f"{'='*50}\n")
 
         import platform
@@ -288,7 +288,7 @@ class Evaluator:
         path = "evaluation_report.json"
         with open(path, "w") as f:
             json.dump(self.results, f, indent=2)
-        print(f"\n💾 Full report saved → {path}")
+        print(f"\n Full report saved → {path}")
         return path
 
     # -------------------------------------------------------
@@ -296,7 +296,7 @@ class Evaluator:
     # -------------------------------------------------------
     def run_all(self):
         print(f"\n{'#'*50}")
-        print(f"  🔬  Robust PCA — Full Evaluation")
+        print(f"    Robust PCA — Full Evaluation")
         print(f"{'#'*50}")
 
         self.collect_system_info()
@@ -311,20 +311,20 @@ class Evaluator:
     # -------------------------------------------------------
     def print_final_summary(self):
         print(f"\n{'#'*50}")
-        print(f"  📋  Final Summary")
+        print(f"    Final Summary")
         print(f"{'#'*50}")
 
         # Pipeline FPS
         pt  = self.results.get("pipeline_timing", {})
         fps = pt.get("estimated_fps", 0)
-        print(f"\n  ⚡ Pipeline Speed  : {fps:.1f} FPS  "
-              + ("✅" if fps >= 5 else "⚠️"))
+        print(f"\n   Pipeline Speed  : {fps:.1f} FPS  "
+              + ("ok" if fps >= 5 else "prob"))
 
         # Best threshold
         rt = self.results.get("recommended_threshold", THRESHOLD)
-        print(f"  🎯 Best Threshold  : {rt}  "
-              + ("✅" if rt == THRESHOLD
-                 else f"⚠️ (update config.py: THRESHOLD = {rt})"))
+        print(f"   Best Threshold  : {rt}  "
+              + ("ok" if rt == THRESHOLD
+                 else f" (update config.py: THRESHOLD = {rt})"))
 
         # RPCA speed
         rs  = self.results.get("rpca_speed", [])
@@ -332,9 +332,9 @@ class Evaluator:
                     if "320x240" in r["config"]), None)
         if med:
             t = med["time_seconds"]
-            print(f"  🔧 RPCA (320x240)  : {t:.1f}s  "
-                  + ("✅" if t < 30 else "⚠️ slow"))
+            print(f"   RPCA (320x240)  : {t:.1f}s  "
+                  + ("ok" if t < 30 else " slow"))
 
-        print(f"\n  📁 Files generated:")
+        print(f"\n   Files generated:")
         print(f"     evaluation_report.json  ← detailed results")
         print(f"\n{'#'*50}\n")
