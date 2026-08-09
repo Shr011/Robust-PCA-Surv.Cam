@@ -75,7 +75,7 @@ class PhoneCamera:
             print(f"   Mode : MJPEG Stream")
             result = self._connect_stream(retries)
             if not result:
-                print(f"\n⚠️  Stream failed → switching to snapshot mode...")
+                print(f"\n  Stream failed → switching to snapshot mode...")
                 self.snapshot_mode = True
                 result = self._connect_snapshot()
 
@@ -99,7 +99,7 @@ class PhoneCamera:
 
                 if frame is not None:
                     fetch_ms = (t_end - t_start) * 1000
-                    print(f"✅ Connected!")
+                    print(f" Connected!")
                     print(f"   Resolution : {frame.shape[1]}x{frame.shape[0]}")
                     print(f"   Fetch time : {fetch_ms:.0f}ms")
                     print(f"   Est. FPS   : {1000/fetch_ms:.1f}")
@@ -107,9 +107,9 @@ class PhoneCamera:
                     return True
 
             except urllib.error.URLError:
-                print(f"   ⚠️ Cannot reach phone.")
+                print(f"    Cannot reach phone.")
             except Exception as e:
-                print(f"   ⚠️ {e}")
+                print(f"    {e}")
             time.sleep(1)
 
         self._print_connection_help()
@@ -124,7 +124,7 @@ class PhoneCamera:
                 if self.cap.isOpened():
                     ret, frame = self.cap.read()
                     if ret and frame is not None:
-                        print(f"✅ MJPEG stream connected!")
+                        print(f" MJPEG stream connected!")
                         self.connected = True
                         return True
                     self.cap.release()
@@ -135,7 +135,7 @@ class PhoneCamera:
         return False
 
     def _print_connection_help(self):
-        print(f"\n❌ Could not connect. Check:")
+        print(f"\n Could not connect. Check:")
         print(f"   1. IP Webcam app is running on phone")
         print(f"   2. Phone and laptop on same Wi-Fi network")
         print(f"   3. Open in browser → {SNAPSHOT_URL}")
@@ -153,7 +153,7 @@ class PhoneCamera:
             name="CameraFetchThread"
         )
         self._fetch_thread.start()
-        print(f"🔄 Frame fetch thread started.")
+        print(f" Frame fetch thread started.")
 
     def _fetch_loop(self):
         """
@@ -189,7 +189,7 @@ class PhoneCamera:
 
                 # Too many failures → try reconnecting
                 if self._consecutive_fails >= 10:
-                    print(f"\n⚠️ {self._consecutive_fails} consecutive failures.")
+                    print(f"\n {self._consecutive_fails} consecutive failures.")
                     print(f"   Attempting reconnect...")
                     self._attempt_reconnect()
 
@@ -239,7 +239,7 @@ class PhoneCamera:
                     arr       = np.frombuffer(url_bytes, dtype=np.uint8)
                     frame     = cv2.imdecode(arr, cv2.IMREAD_COLOR)
                     if frame is not None:
-                        print(f"✅ Reconnected!")
+                        print(f" Reconnected!")
                         return
                 except Exception:
                     pass
@@ -250,10 +250,10 @@ class PhoneCamera:
                 if self.cap.isOpened():
                     ret, frame = self.cap.read()
                     if ret and frame is not None:
-                        print(f"✅ Reconnected!")
+                        print(f" Reconnected!")
                         return
 
-        print(f"❌ Reconnect failed. Check phone and Wi-Fi.")
+        print(f" Reconnect failed. Check phone and Wi-Fi.")
 
     # -------------------------------------------------------
     # READ — main thread calls this
@@ -272,7 +272,7 @@ class PhoneCamera:
     # DIAGNOSTICS
     # -------------------------------------------------------
     def print_stats(self):
-        print(f"\n📊 Camera Stats:")
+        print(f"\n Camera Stats:")
         print(f"   Mode          : {'Snapshot' if self.snapshot_mode else 'MJPEG'}")
         print(f"   Success Rate  : {self.success_rate:.1f}%")
         print(f"   Avg Fetch     : {self.avg_fetch_ms:.0f}ms")
@@ -285,7 +285,7 @@ class PhoneCamera:
     # RELEASE
     # -------------------------------------------------------
     def release(self):
-        print("\n📷 Releasing camera...")
+        print("\n Releasing camera...")
         self._stop_event.set()
         if self._fetch_thread and self._fetch_thread.is_alive():
             self._fetch_thread.join(timeout=3)
@@ -296,7 +296,7 @@ class PhoneCamera:
             pass
         self.connected = False
         self.print_stats()
-        print("✅ Camera released.")
+        print(" Camera released.")
 
     def isOpened(self):
         return self.connected
