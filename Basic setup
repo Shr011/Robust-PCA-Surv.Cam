@@ -1,0 +1,22 @@
+Create a Project Directory
+
+mkdir robust_pca_surveillance
+cd robust_pca_surveillance
+
+ Set Up a Virtual Environment
+
+# Create virtual environment
+python -m venv venv
+
+# Activate it
+# On Windows:
+venv\Scripts\activate
+
+# On Mac/Linux:
+source venv/bin/activate
+
+Install Required Libraries
+
+pip install numpy scipy opencv-python matplotlib ipython
+
+Set Up Phone as IP Camera (install IP Webcam).
