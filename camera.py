@@ -65,7 +65,7 @@ class PhoneCamera:
     # CONNECT
     # -------------------------------------------------------
     def connect(self, retries=3):
-        print(f"\n📱 Connecting to phone camera...")
+        print(f"\n Connecting to phone camera...")
 
         if self.snapshot_mode:
             print(f"   Mode : Snapshot (threaded)")
@@ -75,7 +75,7 @@ class PhoneCamera:
             print(f"   Mode : MJPEG Stream")
             result = self._connect_stream(retries)
             if not result:
-                print(f"\n  Stream failed → switching to snapshot mode...")
+                print(f"\n  Stream failed  switching to snapshot mode...")
                 self.snapshot_mode = True
                 result = self._connect_snapshot()
 
