@@ -10,15 +10,15 @@ from config import FRAME_WIDTH, FRAME_HEIGHT
 # ----------------------------
 # LOAD SAVED MATRICES
 # ----------------------------
-print("📂 Loading matrices...")
+print(" Loading matrices...")
 
 try:
     M = np.load("matrix_M.npy")
     L = np.load("matrix_L.npy")
     S = np.load("matrix_S.npy")
-    print(f"✅ M: {M.shape}  L: {L.shape}  S: {S.shape}")
+    print(f" M: {M.shape}  L: {L.shape}  S: {S.shape}")
 except FileNotFoundError as e:
-    print(f"❌ Missing file: {e}")
+    print(f" Missing file: {e}")
     print("   → Run test_capture.py and test_rpca.py first.")
     exit()
 
@@ -78,5 +78,5 @@ plt.tight_layout()
 plt.savefig("separation_results.png", dpi=100, bbox_inches='tight')
 plt.show()
 
-print("\n💾 Results saved to 'separation_results.png'")
-print("✅ Step 4 Complete!")
+print("\n Results saved to 'separation_results.png'")
+print("  Complete")
