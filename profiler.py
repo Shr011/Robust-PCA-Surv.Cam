@@ -36,7 +36,7 @@ class Profiler:
     def report(self):
         """Print a formatted timing report."""
         print(f"\n{'─'*45}")
-        print(f"  ⏱️  Performance Report")
+        print(f"    Performance Report")
         print(f"{'─'*45}")
         print(f"  {'Section':<22} {'Avg(ms)':>8}  {'Est FPS':>8}")
         print(f"{'─'*45}")
