@@ -8,7 +8,7 @@ from separator import Separator
 from rpca import RobustPCA
 
 print("=" * 50)
-print("  🛠️  Auto Optimizer")
+print("   Auto Optimizer")
 print("=" * 50)
 print("\nTesting your laptop's performance...")
 print("This will take about 1-2 minutes.\n")
@@ -55,13 +55,13 @@ for cfg in configs:
     est_fps = 1000 / t_det if t_det > 0 else 0
 
     if t_rpca < 20 and est_fps >= 8:
-        verdict = "✅ Excellent"
+        verdict = " Excellent"
     elif t_rpca < 45 and est_fps >= 4:
-        verdict = "✅ Good"
+        verdict = " Good"
     elif est_fps >= 2:
-        verdict = "⚠️ Acceptable"
+        verdict = " Acceptable"
     else:
-        verdict = "❌ Too slow"
+        verdict = " Too slow"
 
     print(f"  {cfg['label']:<20} {t_rpca:>9.1f}s "
           f"{est_fps:>7.1f}  {verdict}")
@@ -76,11 +76,11 @@ for cfg in configs:
     })
 
 # Pick best config
-good = [r for r in results if "✅" in r["verdict"]]
+good = [r for r in results if "ok" in r["verdict"]]
 best = max(good, key=lambda x: x["fps"]) if good else results[0]
 
 print(f"\n{'─'*52}")
-print(f"  💡 Recommended settings for your laptop:")
+print(f"   Recommended settings for your laptop:")
 print(f"{'─'*52}")
 print(f"\n  Update your config.py with these values:\n")
 print(f"  FRAME_WIDTH  = {best['w']}")
