@@ -1,8 +1,8 @@
 # config.py
 
 # ── Phone Camera ──────────────────────────────────
-# 🔁 Replace with YOUR phone's IP shown in IP Webcam
-PHONE_STREAM_URL  = "http://192.168.1.5:8080/video"
+#  Replace with YOUR phone's IP shown in IP Webcam
+PHONE_STREAM_URL  = "http://192.168.1.5:8080/video"   # set ip address this is mine
 SNAPSHOT_URL      = "http://192.168.1.5:8080/shot.jpg"
 USE_SNAPSHOT_MODE = True        # True = stable, False = try MJPEG first
 
