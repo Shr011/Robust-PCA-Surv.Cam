@@ -11,7 +11,7 @@ M = capture_frames(num_frames=200)  # Capture 200 frames
 
 if M is not None:
 
-    # Save matrix to disk (so you don't have to recapture every run)
+    # Save matrix to disk (don't have to recapture every run)
     save_matrix(M, "matrix_M.npy")
 
     # ----------------------------
