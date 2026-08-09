@@ -39,7 +39,7 @@ class RobustPCA:
 
     def fit(self, M, progress_callback=None):
         rows, cols = M.shape
-        print(f"\n🔧 RPCA started — Matrix: {M.shape}")
+        print(f"\n RPCA started — Matrix: {M.shape}")
         print(f"   Using Scipy SVD (top {self.n_components} components)")
 
         if self.lam is None:
@@ -70,7 +70,7 @@ class RobustPCA:
 
             status = "running..."
             if error < self.tol:
-                status = "✅ CONVERGED"
+                status = " CONVERGED"
 
             if (i + 1) % 5 == 0 or i == 0 or error < self.tol:
                 print(f"{i+1:>5}  {error:>10.6f}  {status}")
@@ -79,11 +79,11 @@ class RobustPCA:
                 progress_callback(i + 1, error)
 
             if error < self.tol:
-                print(f"\n✅ Done in {i+1} iterations!")
+                print(f"\n Done in {i+1} iterations!")
                 break
 
         else:
-            print(f"\n⚠️ Stopped at max iterations ({self.max_iter})")
+            print(f"\n Stopped at max iterations ({self.max_iter})")
             print(f"   Final error: {error:.6f}")
 
         self.L = L
