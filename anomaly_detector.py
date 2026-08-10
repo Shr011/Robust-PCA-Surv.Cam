@@ -1,5 +1,5 @@
 # anomaly_detector.py
-# Smart anomaly detection with zones, loitering, alerts and logging
+# anomaly detection with zones, loitering, alerts and logging
 
 import cv2
 import numpy as np
